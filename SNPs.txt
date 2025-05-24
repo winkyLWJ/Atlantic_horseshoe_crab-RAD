@@ -1,0 +1,35 @@
+###################STACKS SNP calling##################################################################
+ref_map.pl -T 12 --samples DIRECTORYTOSORTEDBAMFILES --popmap ./SPECIES_popmap.txt -o OUTDIR -X "populations: --plink"
+
+###################PLINK for quality filters###########################################################
+##NOTE: use --recode flexibly for different output 
+####("--recode " to create .ped file for next step; 
+#####"--reocde vcf" to create .vcf file for R-based analyses; 
+#####"--recode12" to create .ped file for ADMIXTURE; 
+#####"--recode A" to create .raw file for R-based DAPC analysis)
+
+##DATASET with 15% missingness (DATA15)
+plink --file STACKSOUTPUT --allow-extra-chr --geno 0.15 --out DATA15 --recode
+
+##DATASET with 15% missingness, linked loci filtered (DATA15L)
+plink --file DATA15 --allow-extra-chr --allow-no-sex --indep-pairwise 25 10 0.95
+plink --file DATA15 --extract plink.prune.in --allow-extra-chr --out DATA15L --recode
+
+##DATASET with 15% missingness, loci with minimum allele frequency < 0.05 filtered (DATA155)
+plink --file DATA15 --maf 0.05 --allow-extra-chr --out DATA155 --recode
+
+##DATASET with 15% missingness, linked loci filtered, loci with minimum allele frequency < 0.05 filtered (DATA15L5)
+plink --file DATA15L --maf 0.05 --allow-extra-chr --out DATA15L5 --recode
+
+##DATASET with 20% missingness (DATA2)
+plink --file STACKOUTPUT --allow-extra-chr --geno 0.2 --out DATA2 --recode
+
+##DATASET with 20% missingness, linked loci filtered (DATA2L)
+plink --file DATA2 --allow-extra-chr --allow-no-sex --indep-pairwise 25 10 0.95
+plink --file DATA2 --extract plink.prune.in --allow-extra-chr --out DATA2L --recode
+
+##DATASET with 20% missingness, loci with minimum allele frequency < 0.05 filtered (DATA25)
+plink --file DATA2 --maf 0.05 --allow-extra-chr --out DATA25 --recode
+
+##DATASET with 20% missingness, linked loci filtered, loci with minimum allele frequency < 0.05 filtered (DATA2L5)
+plink --file DATA2L --maf 0.05 --allow-extra-chr --out DATA2L5 --recode

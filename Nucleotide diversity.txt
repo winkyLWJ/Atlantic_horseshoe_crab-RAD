@@ -1,0 +1,18 @@
+##################Population-based statistics######################################
+## Nucleotide diversity
+###calculate nucleotide diversity
+pixy \
+--stats pi \
+--vcf vcf.gz \
+--populations pop.list \
+--window_size 10000 \
+--n_cores 50 \
+--output_prefix LP
+
+###count
+cat LP_pi.txt |cut -f1 |sort|uniq >pop.list
+cat pop.list | while read line
+do
+    a=$(echo $line | awk '{print $1}');
+    cat LP_pi.txt |awk '$1 == "'$a'" {suma+=$7;sumb+=$8} END {print "'$a'", suma, sumb, suma/sumb}' >> pi_average.txt
+done
