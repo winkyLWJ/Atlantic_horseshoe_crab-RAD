@@ -1,0 +1,36 @@
+// Priors and rules file
+// *********************
+
+[PARAMETERS]
+//#isInt? #name   #dist.#min  #max
+//all Ns are in number of haploid individuals
+1  NPOP0$    logunif    1e2    1e7    output
+1  NPOP1$    logunif    1e2    1e7    output
+1  NPOP0Bot$    logunif    1e2    1e7    output
+1  NPOP1Bot$    logunif    1e2    1e7    output
+1  NPOP0E$     logunif     1e2  1e7   output
+1  NPOP1E$     logunif     1e2  1e7   output
+1  ANCSIZE$  logunif    1e2    1e7    output
+1  TDIV0$    logunif    1e3    1e5    output
+1  TP1$       logunif     1e2   5e4   hide
+1  TP2$       logunif     1e2   5e4   hide
+0  Mix01$    logunif    1e-4    0.5    output
+0  Mix10$    logunif    1e-4    0.5    output
+0  Mig01$    logunif    1e-4    0.5    output
+0  Mig10$    logunif    1e-4    0.5    output
+
+
+[RULES]
+
+[COMPLEX PARAMETERS]
+1  TDIV1$ = TDIV0$ +  TP1$   output
+1  TDIV2$ = TDIV1$ + TP2$   output
+0  RES0$ =  NPOP0E$/ NPOP0Bot$   output
+0  RES1$ =  NPOP1E$/ NPOP1Bot$   output
+0  RES2$ = ANCSIZE$/NPOP1E$   output
+0  RATIO0$ = NPOP0Bot$/NPOP0$     hide
+0  RATE0$ = log(RATIO0$)    hide
+0  R0$ = RATE0$/TDIV0$     hide
+0  RATIO1$ = NPOP1Bot$/NPOP1$     hide
+0  RATE1$ = log(RATIO1$)    hide
+0  R1$ = RATE1$/TDIV0$     hide

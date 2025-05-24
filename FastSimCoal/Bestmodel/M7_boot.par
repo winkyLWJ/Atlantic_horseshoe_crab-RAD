@@ -1,0 +1,38 @@
+//Parameters for the coalescence simulation program :
+2 samples to simulate :
+//Population effective sizes (number of genes)
+2832
+320281
+//Samples sizes and samples age
+34
+76
+//Growth rates  : negative growth implies population expansion
+-3.761002880288530e-04
+-4.856983764421958e-03
+//Number of migration matrices
+4
+//Migration matrix 0
+0.0000 1.747850985499698e-04
+1.169734263767872e-04 0.0000
+//Migration matrix 1
+0.0000 0.0000
+0.0000 0.0000
+//Migration matrix 2
+0.0000 1.813575031566830e-01
+1.736951456392301e-03 0.0000
+//Migration matrix 3
+0.0000 0.0000
+0.0000 0.0000
+//historical event: time, source, sink, migrants, new deme size, new growth rate, migration matrix index
+5 historical event
+1131 0 0 0 1 0 1
+1131 1 1 0 1 0 1
+1562 0 0 0 1.369275401864803e+00 0 2
+1562 1 1 0 2.529219590500793e-01 0 2
+1834 0 1 1 4.848989655732685e+03 0 3
+//Number of independent loci [chromosome]
+200000 0
+//Per chromosome:
+1
+//per Block: data type, number of loci, per generation recombination and mutation rates and optional parameters
+DNA 100 0 1.918e-8 OUTEXP
